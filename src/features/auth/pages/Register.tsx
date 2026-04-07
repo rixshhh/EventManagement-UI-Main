@@ -46,6 +46,7 @@ export const Register = () => {
           />
 
           <button
+            onClick={() => navigate("/auth/login")}
             type="submit"
             className="w-full bg-indigo-500 hover:bg-indigo-600 py-3 rounded-xl transition"
           >

@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetEventById, useJoinEventMutations } from "../queries";
+import { toast } from "sonner";
 
 export default function JoinEvent() {
   const { id } = useParams();
@@ -41,7 +42,7 @@ export default function JoinEvent() {
       },
       {
         onSuccess: () => {
-          alert("Event joined successfully.");
+          toast.success("Event joined successfully.");
           navigate("/user/profile");
         },
       },

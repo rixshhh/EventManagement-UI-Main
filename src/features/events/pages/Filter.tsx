@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { useFilterEventsMutation } from "../queries";
+import { Controller, useForm } from "react-hook-form";
+import { useCategoryQuery, useFilterEventsMutation } from "../queries";
 import EventCard from "../components/EventCard";
+import { Dropdown } from "primereact/dropdown";
 
 type FilterForm = {
   eventDate?: string;
@@ -11,15 +12,16 @@ type FilterForm = {
 export const Filter = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const { register, handleSubmit, reset } = useForm<FilterForm>();
+  const { register, handleSubmit,control, reset } = useForm<FilterForm>();
+  
   const { mutate, data = [], isPending } = useFilterEventsMutation();
+
+  const {data : categories } = useCategoryQuery();
 
   const onSubmit = (formData: FilterForm) => {
     mutate({
       eventDate: formData.eventDate || undefined,
-      eventCategoryId: formData.eventCategoryId
-        ? Number(formData.eventCategoryId)
-        : undefined,
+      eventCategoryId: formData.eventCategoryId || undefined,
     });
     setIsOpen(false);
   };
@@ -50,11 +52,20 @@ export const Filter = () => {
                   className="w-full bg-white/5 border border-white/10 px-4 py-3 rounded-xl text-gray-300 focus:outline-none focus:border-indigo-500"
                 />
 
-                <input
-                  type="number"
-                  placeholder="Category Id"
-                  {...register("eventCategoryId")}
-                  className="w-full bg-white/5 border border-white/10 px-4 py-3 rounded-xl text-gray-300 focus:outline-none focus:border-indigo-500"
+                <Controller
+                  name="eventCategoryId"
+                  control={control}
+                  render={({ field }) => (
+                    <Dropdown
+                      value={field.value}
+                      options={categories}
+                      optionLabel="name"
+                      optionValue="id"
+                      placeholder="Select Category"
+                      className="w-full"
+                      onChange={(e) => field.onChange(e.value)}
+                    />
+                  )}
                 />
 
                 <div className="flex justify-end gap-3 pt-2">

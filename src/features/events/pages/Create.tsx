@@ -3,6 +3,7 @@ import { Dropdown } from "primereact/dropdown";
 import useCreateEventMutation from "../queries";
 import { ApiServices } from "../../../services";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 
 interface CreateEventModalProps {
   isOpen: boolean;
@@ -27,6 +28,7 @@ export const CreateEvent = ({ isOpen, onClose }: CreateEventModalProps) => {
   const onSubmit = (data: Master.EventForm) => {
     mutate(data, {
       onSuccess: () => {
+        toast.success("Event created successfully.")
         reset();
         onClose();
       },

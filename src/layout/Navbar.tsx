@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -9,6 +10,9 @@ const Navbar = () => {
 
   const logout = () => {
     localStorage.removeItem("user");
+    localStorage.removeItem("isLoggedIn");
+
+    toast.success("Logged out successfully");
     navigate("/");
   };
 
