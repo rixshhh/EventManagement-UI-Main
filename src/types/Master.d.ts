@@ -48,15 +48,20 @@ declare namespace Master {
     location: string;
   }
 
-   interface UserProfile {
+  interface UserProfile {
     id: number;
     name: string;
     joinedEvents: JoinedEvent[];
     totalJoinedEvents: number;
   }
 
-  interface JoinEvent{
-    userId : number;
-    eventId : number;
+  interface JoinEvent {
+    userId: number;
+    eventId: number;
+  }
+
+  interface RegisterForm {
+    name: string;
+    password: string;
   }
 }

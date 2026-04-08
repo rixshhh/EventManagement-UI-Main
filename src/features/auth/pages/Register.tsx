@@ -2,25 +2,23 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
 import { ApiServices } from "../../../services";
+import { toast } from "sonner";
 
-interface RegisterForm {
-  name: string;
-  password: string;
-}
 
 export const Register = () => {
-  const { register, handleSubmit } = useForm<RegisterForm>();
+  const { register, handleSubmit } = useForm<Master.RegisterForm>();
   const navigate = useNavigate();
 
   const { mutate, isPending } = useMutation({
-    mutationFn: async (data: RegisterForm) => {
+    mutationFn: async (data: Master.RegisterForm) => {
       return await ApiServices.post("auth/register", data);
     },
   });
 
-  const onSubmit = (data: RegisterForm) => {
+  const onSubmit = (data: Master.RegisterForm) => {
     mutate(data, {
       onSuccess: () => {
+        toast.success("Registered successfully.")
         navigate("/login");
       },
     });

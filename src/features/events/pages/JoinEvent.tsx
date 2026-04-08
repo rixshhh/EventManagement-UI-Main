@@ -45,6 +45,9 @@ export default function JoinEvent() {
           toast.success("Event joined successfully.");
           navigate("/user/profile");
         },
+        onError : () => {
+          toast.error("You have already joined this event.")
+        }
       },
     );
   };

@@ -9,8 +9,7 @@ export default function Profile() {
 
   useEffect(() => {
     if (!user.id) return;
-
-    ApiServices.get<Master.UserProfile>(`users/${user.id}/events`)
+    ApiServices.get<Master.UserProfile>(`users/${user.id}/profile`)
       .then(setData)
       .finally(() => setIsLoading(false));
   }, [user.id]);
