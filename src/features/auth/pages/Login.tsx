@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { toast } from "sonner";
-import useLoginMutation from "../queries";
+import {useLoginMutation} from "../queries";
 
 export const Login = () => {
   const navigate = useNavigate();

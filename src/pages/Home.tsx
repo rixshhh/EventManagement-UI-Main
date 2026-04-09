@@ -35,7 +35,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="max-w-6xl mx-auto px-6 py-12 grid md:grid-cols-3 gap-8">
+      {/* <section className="max-w-6xl mx-auto px-6 py-12 grid md:grid-cols-3 gap-8">
         {[
           {
             title: "Easy Event Creation",
@@ -58,7 +58,7 @@ export default function Home() {
             <p className="text-gray-400 text-sm">{f.desc}</p>
           </div>
         ))}
-      </section>
+      </section> */}
 
       <section className="max-w-6xl mx-auto px-6 py-12">
         <h2 className="text-2xl font-semibold mb-6 tracking-tight text-white">

@@ -26,8 +26,14 @@ async function request<TResult>(method: string, url: string, body?: unknown) {
       Origin: window.location.host,
       "Content-Type": "application/json; charset=utf-8",
     },
+    credentials: "include",
   });
 
+  if (!response.ok) {
+    const error = await response.text();
+    throw new Error(error || "Something went wrong");
+  }
+  
   const json = await response.json();
 
   return json as TResult;

@@ -1,17 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { useCurrentUserQuery, useLogoutMutation } from "../features/auth/queries";
 
 const Navbar = () => {
   const navigate = useNavigate();
 
-  const user: Master.User | null = JSON.parse(
-    localStorage.getItem("user") || "null",
-  );
+  const {data: user} = useCurrentUserQuery();
+  const { mutate: logoutUser } = useLogoutMutation();
 
   const logout = () => {
-    localStorage.removeItem("user");
-    localStorage.removeItem("isLoggedIn");
-
+    logoutUser();
     toast.success("Logged out successfully");
     navigate("/");
   };
