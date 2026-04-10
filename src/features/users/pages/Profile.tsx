@@ -1,18 +1,21 @@
 import { useEffect, useState } from "react";
 import { ApiServices } from "../../../services";
+import { useCurrentUserQuery } from "../../auth/queries";
 
 export default function Profile() {
   const [data, setData] = useState<Master.UserProfile>();
   const [isLoading, setIsLoading] = useState(true);
 
-  const user = JSON.parse(localStorage.getItem("user") || "{}");
+  // const user = JSON.parse(localStorage.getItem("user") || "{}");
+
+  const { data : user} = useCurrentUserQuery();
 
   useEffect(() => {
-    if (!user.id) return;
+    if (!user?.id) return;
     ApiServices.get<Master.UserProfile>(`users/${user.id}/profile`)
       .then(setData)
       .finally(() => setIsLoading(false));
-  }, [user.id]);
+  }, [user?.id]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-black text-white pt-24 px-6">
@@ -25,7 +28,7 @@ export default function Profile() {
                 {user?.name?.charAt(0) || "U"}
               </div>
               <div>
-                <h1 className="text-4xl font-bold tracking-tight">{user.name}</h1>
+                <h1 className="text-4xl font-bold tracking-tight">{user?.name}</h1>
                 <p className="text-gray-400 mt-1">Welcome back to your event dashboard</p>
               </div>
             </div>
@@ -37,7 +40,7 @@ export default function Profile() {
               </div>
               <div className="rounded-2xl bg-white/5 border border-white/10 p-4">
                 <p className="text-sm text-gray-400">Profile ID</p>
-                <p className="text-3xl font-bold">#{user.id}</p>
+                <p className="text-3xl font-bold">#{user?.id}</p>
               </div>
             </div>
           </div>

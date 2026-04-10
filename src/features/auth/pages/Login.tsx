@@ -20,9 +20,6 @@ export const Login = () => {
     if (isSuccess && data) {
       toast.success(`Welcome back ${data.user.name}`);
 
-      localStorage.setItem("isLoggedIn", "true");
-      localStorage.setItem("user", JSON.stringify(data.user));
-
       setTimeout(() => navigate("/"), 1000);
     }
   }, [isSuccess, data, navigate]);

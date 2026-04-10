@@ -56,7 +56,6 @@ declare namespace Master {
   }
 
   interface JoinEvent {
-    userId: number;
     eventId: number;
   }
 

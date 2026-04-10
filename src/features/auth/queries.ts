@@ -12,9 +12,16 @@ export function useCurrentUserQuery() {
 }
 
 export function useLoginMutation() {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: async (data: { name: string; password: string }) => {
       return await ApiServices.post<Master.LoginResponse>("auth/login", data);
+    },
+    onSuccess: async () => {
+      const user = await ApiServices.get<Master.User>("auth/me");
+
+     queryClient.setQueryData(["current-user"], user);
     },
   });
 }
@@ -23,13 +30,13 @@ export function useLogoutMutation() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (data) => {
-      return await ApiServices.post("auth/logout",data);
+    mutationFn: async () => {
+      return await ApiServices.post("auth/logout", {});
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["current-user"],
-      });
+    onSuccess: async () => {
+    queryClient.setQueryData(["current-user"], null);
+
+    queryClient.invalidateQueries({ queryKey: ["current-user"] });
     },
   });
 }

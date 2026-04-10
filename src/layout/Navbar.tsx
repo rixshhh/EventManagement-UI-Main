@@ -1,11 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
-import { useCurrentUserQuery, useLogoutMutation } from "../features/auth/queries";
+import {
+  useCurrentUserQuery,
+  useLogoutMutation,
+} from "../features/auth/queries";
 
 const Navbar = () => {
   const navigate = useNavigate();
 
-  const {data: user} = useCurrentUserQuery();
+  const { data: user } = useCurrentUserQuery();
+  
   const { mutate: logoutUser } = useLogoutMutation();
 
   const logout = () => {

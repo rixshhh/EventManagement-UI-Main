@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { useCurrentUserQuery } from "../../auth/queries";
 
 interface EventCardProps {
   event: Master.Events;
@@ -7,7 +8,7 @@ interface EventCardProps {
 export const EventCard = ({ event }: EventCardProps) => {
   const navigate = useNavigate();
 
-  const token = localStorage.getItem("user");
+  const {data : user } = useCurrentUserQuery();
 
   return (
     <div className="relative p-[1px] rounded-2xl bg-gradient-to-br from-indigo-500/30 via-purple-500/20 to-transparent hover:from-indigo-500/50 hover:to-purple-500/40 transition">
@@ -27,7 +28,7 @@ export const EventCard = ({ event }: EventCardProps) => {
 
         <button
           onClick={() => {
-            if (!token) {
+            if (!user) {
               navigate("/auth/login");
             } else {
               navigate(`/events/join/${event.id}`);
