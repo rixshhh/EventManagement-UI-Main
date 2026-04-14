@@ -63,4 +63,20 @@ declare namespace Master {
     name: string;
     password: string;
   }
+
+  interface EventReportItem {
+    eventId: number;
+    eventName: string;
+    joinedUsers: number;
+    eventDate: string;
+    status: string;
+  }
+
+  interface DashboardReport {
+    totalEvents: number;
+    totalUsers: number;
+    activeEvents: number;
+    expiredEvents: number;
+    eventReports: EventReportItem[];
+  }
 }
