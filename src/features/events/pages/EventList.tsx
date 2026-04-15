@@ -1,12 +1,13 @@
 import { useEventQuery } from "../queries";
 import EventCard from "../components/EventCard";
-import { useState } from "react";
-import CreateEvent from "./Create";
+import { Outlet, useNavigate } from "react-router-dom";
 
 export const EventsPage = () => {
   const { data = [], isLoading } = useEventQuery();
 
-  const [isCreateOpen, setIsCreateOpen] = useState(false);
+  // const [isCreateOpen, setIsCreateOpen] = useState(false);
+
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen pt-24 px-6 bg-gradient-to-b from-gray-950 via-gray-900 to-black text-white">
@@ -15,7 +16,7 @@ export const EventsPage = () => {
           <h2 className="text-3xl font-bold tracking-tight">Events</h2>
 
           <button
-            onClick={() => setIsCreateOpen(true)}
+            onClick={() => navigate("create")}
             className="bg-indigo-500 hover:bg-indigo-600 px-5 py-2 rounded-xl transition"
           >
             + Create Event
@@ -34,10 +35,7 @@ export const EventsPage = () => {
           </div>
         )}
       </div>
-      <CreateEvent
-        isOpen={isCreateOpen}
-        onClose={() => setIsCreateOpen(false)}
-      />
+      <Outlet/>
     </div>
   );
 };
