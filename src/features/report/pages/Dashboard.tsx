@@ -53,7 +53,6 @@ export default function Dashboard() {
   return (
     <div className="min-h-screen pt-28 px-6 bg-gradient-to-b from-gray-950 via-gray-900 to-black text-gray-100">
       <div className="max-w-6xl mx-auto space-y-8">
-        {/* Heading */}
         <div>
           <h1 className="text-3xl font-bold">Dashboard Report</h1>
           <p className="text-gray-400 mt-1">

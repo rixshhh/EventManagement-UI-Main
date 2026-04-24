@@ -97,7 +97,7 @@ const Navbar = () => {
               </button>
             </>
           )}
-          <select
+          {/* <select
             value={i18n.language}
             onChange={(e) => language(e.target.value as "en-IN" | "hi-IN" | "fr-FR")}
             className="bg-transparent text-white border rounded px-2 py-1"
@@ -111,7 +111,7 @@ const Navbar = () => {
             <option value="fr-FR" className="text-black">
               Français
             </option>
-          </select>
+          </select> */}
         </div>
       </div>
     </nav>

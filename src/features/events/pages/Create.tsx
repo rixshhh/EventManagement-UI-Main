@@ -14,10 +14,8 @@ interface Categories {
   id: number;
   name: string;
 }
-
+  
 export const CreateEvent = ({ isOpen, onClose }: CreateEventModalProps) => {
-  const [users, setUser] = useState<Master.User[]>([]);
-
   const [categories, setCategories] = useState<Categories[]>([]);
 
   const { register, handleSubmit, control, reset } =
@@ -39,14 +37,9 @@ export const CreateEvent = ({ isOpen, onClose }: CreateEventModalProps) => {
     ApiServices.get<Categories[]>("categories").then(setCategories);
   };
 
-  const fetchUser = () => {
-    ApiServices.get<Master.User[]>("users").then(setUser);
-  };
-
   useEffect(() => {
     if (isOpen) {
       fetchCategories();
-      fetchUser();
     }
   }, [isOpen]);
 
@@ -106,21 +99,6 @@ export const CreateEvent = ({ isOpen, onClose }: CreateEventModalProps) => {
             )}
           />
 
-          <Controller
-            name="userId"
-            control={control}
-            render={({ field }) => (
-              <Dropdown
-                {...field}
-                options={users}
-                optionLabel="name"
-                optionValue="id"
-                placeholder="Select User"
-                className="w-full bg-white/5 border border-white/10 rounded-xl text-gray-200"
-                onChange={(e) => field.onChange(e.value)}
-              />
-            )}
-          />
 
           <div className="flex justify-end gap-3 pt-2">
             <button

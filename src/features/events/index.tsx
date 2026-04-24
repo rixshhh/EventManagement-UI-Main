@@ -8,7 +8,6 @@ export default function Events() {
   return (
     <Routes>
       <Route index element={<Navigate to="list" />} />
-
       <Route path="list" element={<EventsList />}>
         <Route
           path="create"
@@ -17,7 +16,6 @@ export default function Events() {
           }
         />
       </Route>
-
       <Route path="filter" element={<Filter />} />
       <Route path="join/:id" element={<JoinEvent />} />
     </Routes>
